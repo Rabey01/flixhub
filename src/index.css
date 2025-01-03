@@ -1,68 +1,76 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* index.css */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+html,body {
+  background-color: #121212;  /* Dark background */
+  color: #E0E0E0;             /* Light text color */
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#root {
+  height: 100%;
+  overflow: auto; /* Allow scrolling within the root container */
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333333; /* Dark background for scrollbar track */
+  border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #444444; /* Slightly lighter dark color for the thumb */
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #333333; /* Adds a border to the thumb for separation */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #1976D2; /* Change thumb color on hover to highlight */
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #E0E0E0;  /* Ensure text remains light */
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color: #1976D2;  /* Highlight links */
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.MuiButton-root {
+  background-color: #333333;  /* Dark buttons */
+  color: #E0E0E0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.MuiCard-root {
+  background-color: #333333;  /* Dark card backgrounds */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.MuiTextField-root {
+  background-color: #333333;
+  color: #E0E0E0;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.MuiDialog-paper {
+  background-color: #2A2A2A;  /* Dark dialog background */
+  color: #E0E0E0;
 }
+
+.MuiOutlinedInput-root {
+  background-color: #333333;
+  color: #E0E0E0;
+}
+
+.MuiInputLabel-root {
+  color: #B0B0B0;  /* Light color for labels */
+}
+
+.MuiIconButton-root {
+  color: #B0B0B0;  /* Light color for icons */
+}
+
+/* Add more specific overrides for other components as needed */

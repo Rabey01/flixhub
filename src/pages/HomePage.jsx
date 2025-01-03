@@ -1,7 +1,8 @@
 import { useState,useEffect,useRef } from "react";
 import { fetchReleases,fetchSearchResults,fetchTitleDetails } from "../api";
 //Material UI components
-import { Container,Typography,Card,CardContent,CardMedia,CircularProgress,TextField,IconButton,InputAdornment,Dialog,DialogTitle,DialogContent,Button } from "@mui/material";
+import { Container,Typography,Card,CardContent,CardMedia,CircularProgress,TextField,
+		IconButton,InputAdornment,Dialog,DialogTitle,DialogContent,Button,Skeleton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -105,11 +106,11 @@ const HomePage = () => {
 	};
 
   return (
-    <Container maxWidth="lg" sx={{ paddingTop: "20px",paddingBottom: "20px", backgroundColor: "#121212", color: "#E0E0E0" }}>
+    <Container maxWidth="lg" sx={{ paddingTop: "40px",paddingBottom: "40px", }}>
 		<Typography variant="h3" gutterBottom sx={{ 
 			color: "#FFFFFF",  // White text for high contrast
 			fontWeight: "700",  // Bold font for a strong title
-			fontSize: "3rem",   // Large size for impact
+			fontSize: {xs: "2rem", sm: "3rem", md: "3rem"},   // Large size for impact
 			letterSpacing: "1px",  // Slightly increased letter spacing for a modern look
 			textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",  // Subtle text shadow to add depth
 			textTransform: "uppercase",  // Make the text uppercase for a sleek look
@@ -122,7 +123,7 @@ const HomePage = () => {
 			<Typography variant="body1" sx={{ 
 				marginBottom: "20px",
 				color: "#B0B0B0", 
-				fontSize: "1.2rem", 
+				fontSize: { xs: "0.9rem", sm: "1.2rem" }, 
 				lineHeight: "1.6", 
 				textAlign: "center"
 			}}>
@@ -182,7 +183,12 @@ const HomePage = () => {
 
 		{loading ? 
 			( 
-				<CircularProgress sx={{ color: "#4CAF50" }}/> 
+				<div>
+					<Skeleton variant="text" width="80%" height={40} sx={{ marginBottom: 2 }} />
+					<Skeleton variant="rectangular" width="100%" height={300} sx={{ marginBottom: 2 }} />
+					<Skeleton variant="rectangular" width="100%" height={300} sx={{ marginBottom: 2 }} />
+					<CircularProgress sx={{ color: "#4CAF50" }} />
+       			 </div> 
 			): titleDetails ? (  // If titleDetails exists, show details and hide grids
 				<Dialog open={open} onClose={handleClose}  maxWidth="sm" fullWidth sx={{ backgroundColor: "#2A2A2A", color: "#E0E0E0" }}>
 					<DialogTitle sx={{ backgroundColor: "#2A2A2A", color: "#E0E0E0" }}>
@@ -240,7 +246,7 @@ const HomePage = () => {
 					{/* Display search results if available */}
 					{query.length > 0 ? (
 						<>
-							<Typography variant="h4" gutterBottom sx={{ color: "#FFFFFF" }}>
+							<Typography variant="h4" gutterBottom sx={{ color: "#FFFFFF",marginBottom: "20px", fontSize: { xs: "1.3rem", sm: "1.5rem", md: "2rem" } }}>
 								Search Results
 							</Typography>
 							
@@ -257,7 +263,7 @@ const HomePage = () => {
 								Go Back
 							</Button>
 
-							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px',}}>							
+							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '30px',}}>							
 								{searchResults.map((item) => (
 									<div key={item.id}>
 										<Card sx={{'&:hover': { boxShadow: 10, transform: 'scale(1.05)',transition: 'transform 0.3s, box-shadow 0.3s'},height: '100%',cursor: 'pointer',backgroundColor: '#333333',position: 'relative',}} onClick={() => handleTitleClick(item.id)}>
@@ -270,7 +276,7 @@ const HomePage = () => {
 											loading="lazy"
 										/>
 										<CardContent sx={{ color: "#E0E0E0" }}>
-											<Typography variant="h6" sx={{ color: "#B0B0B0" }}>
+											<Typography variant="h6" sx={{ color: "#B0B0B0", fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" } }}>
 											{item.name} ({item.year || "N/A"}) {/* Use name and year directly from the search result */}
 											</Typography>
 										</CardContent>
@@ -278,14 +284,14 @@ const HomePage = () => {
 									</div>
 								))}
 							</div>
-							{errorMessage && <Typography variant="h6" color="error" sx={{backgroundColor: '#333333', color: '#FF5722',padding: '10px',borderRadius: '5px',marginTop: '10px'}}>{errorMessage}</Typography>}
+							{errorMessage && <Typography variant="h6" color="error" sx={{backgroundColor: '#333333', color: '#FF5722',padding: '10px',borderRadius: '5px',marginTop: '10px', fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" }}}>{errorMessage}</Typography>}
 						</>
 					):(
 						<>
-							<Typography variant="h4" gutterBottom sx={{ marginTop: "40px", color: "#FFFFFF" }}>
+							<Typography variant="h4" gutterBottom sx={{ marginTop: "40px", color: "#FFFFFF",marginBottom: "20px", fontSize: { xs: "1.3rem", sm: "1.5rem", md: "2rem" } }}>
 							Coming Soon: Movies
 							</Typography>
-							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px',}}>
+							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '30px',}}>
 								{releases.map((release) => (
 									release.type === 'movie' && (
 										<div key={release.id}>
@@ -299,7 +305,7 @@ const HomePage = () => {
 													loading="lazy"
 												/>
 												<CardContent sx={{ color: "#E0E0E0" }}>
-													<Typography variant="h6">
+													<Typography variant="h6" sx={{ fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" } }}>
 														{release.title} ({release.source_release_date && typeof release.source_release_date === 'string'? release.source_release_date.slice(0, 4) : "N/A"})
 													</Typography>
 												</CardContent>
@@ -309,10 +315,10 @@ const HomePage = () => {
 								))}
 							</div>
 
-							<Typography variant="h4" gutterBottom sx={{ marginTop: "40px",color: "#FFFFFF" }}>
+							<Typography variant="h4" gutterBottom sx={{ marginTop: "40px",color: "#FFFFFF",marginBottom: "20px", fontSize: { xs: "1.3rem", sm: "1.5rem", md: "2rem" } }}>
 							Coming Soon: TV Series
 							</Typography>
-							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px',}}>
+							<div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '30px',}}>
 								{releases.map((release) => (
 									release.type === 'tv_series' && (
 										<div key={release.id}>
@@ -326,7 +332,7 @@ const HomePage = () => {
 													loading="lazy"
 												/>
 												<CardContent sx={{ color: "#E0E0E0" }}>
-													<Typography variant="h6">
+													<Typography variant="h6" sx={{ fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" } }}>
 														{release.title} ({release.source_release_date && typeof release.source_release_date === 'string' ? release.source_release_date.slice(0, 4) : "N/A"}) 
 													</Typography>
 												</CardContent>
