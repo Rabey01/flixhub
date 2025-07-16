@@ -1,5 +1,12 @@
-# FlixHub
+# FlixHub – Movie Browser App
 
-This is my React app deployed on Netlify.
+A responsive React app to search and explore movies with live data.
+
 ## Live Demo
-[Click here to view the live app](https://flixhub-app.netlify.app/)
+[https://flixhub-app.netlify.app](https://flixhub-app.netlify.app)
+
+## Tech Stack
+- React.js  
+- WATCHMODE API  
+- Axios, React Router  
+- Deployed on Netlify
